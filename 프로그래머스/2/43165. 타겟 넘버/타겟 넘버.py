@@ -7,9 +7,5 @@ def solution(numbers, target):
             tmp.append(n + num)
             tmp.append(n - num)
         n_list = tmp
-    
-    for result_num in n_list:
-        if result_num == target:
-            answer += 1
             
-    return answer
+    return n_list.count(target)
