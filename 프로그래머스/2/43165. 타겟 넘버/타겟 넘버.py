@@ -1,11 +1,15 @@
+from collections import deque
 def solution(numbers, target):
-    answer = 0
-    n_list = [0]
-    for num in numbers :
-        tmp = []
-        for n in n_list:
-            tmp.append(n + num)
-            tmp.append(n - num)
-        n_list = tmp
-            
-    return n_list.count(target)
+    n = len(numbers)
+    sum_list = [numbers[0], -numbers[0]] 
+    
+    for i in range(1, n):
+        temp = []
+        for v in sum_list:
+            temp.append(v + numbers[i])
+            temp.append(v - numbers[i])
+           
+        sum_list = temp    
+    return sum_list.count(target)
+
+
