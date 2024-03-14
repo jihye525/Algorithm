@@ -1,22 +1,21 @@
-from collections import defaultdict
-
 def solution(tickets):
-    graph = defaultdict(list)
-
-    for (start, end) in tickets:
-        graph[start].append(end)
-
-    for airport in graph:
-        graph[airport].sort(reverse=True)
-
-    path = []
-    stack = ["ICN"]
-    while stack:
-        route = stack[-1]
-        if not graph[route]:
-            path.append(stack.pop())
-        else:
-            next_route = graph[route].pop()
-            stack.append(next_route)
-
-    return path[::-1]
+    route = []
+    visited = [False] * len(tickets)
+    
+    def dfs(airport, path):
+        
+        if len(path) == len(tickets) + 1:
+            route.append(path)
+            return
+        
+        for idx, ticket in enumerate(tickets):
+            if not visited[idx] and ticket[0] == airport:
+                visited[idx] = True
+                dfs(ticket[1], path+[ticket[1]])
+                visited[idx] = False
+    
+    dfs("ICN",["ICN"])
+    
+    route.sort()
+    
+    return route[0]
