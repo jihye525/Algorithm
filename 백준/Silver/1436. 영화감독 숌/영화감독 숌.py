@@ -1,12 +1,8 @@
 n = int(input())
-nth = 666
-cnt = 0 
-
-while True:
-    if '666' in str(nth):
+cnt = 0
+for i in range(666, 1000000000):
+    if '666' in str(i):
         cnt += 1
     if cnt == n:
-        print(nth)
+        print(i)
         break
-    nth += 1
-    
