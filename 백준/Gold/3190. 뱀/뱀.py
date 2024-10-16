@@ -3,10 +3,10 @@ from collections import deque
 input = sys.stdin.readline
 n = int(input())
 mat = [[0] * n for _ in range(n)]
-dr = [0, 1, 0, -1] #행 우하좌상
+dr = [0, 1, 0, -1] #행
 dc = [1, 0, -1, 0] #열
 direction = 0
-snake = deque([[0, 0]])
+snake = deque([[0,0]])
 mat[0][0] = 1
 play_time = 0
 apples = int(input())
@@ -26,7 +26,7 @@ while True:
     mr, mc = nr+dr[direction], nc+dc[direction]
     snake.append([nr, nc])
 
-    if mr < 0 or mr >= n or mc < 0 or mc >= n or [mr, mc] in snake: #벽에 막히거나 자신의 몸과 만나면 게임오버
+    if mr < 0 or mr >= n or mc < 0 or mc >= n or mat[mr][mc] == 1: #벽에 막히거나 자신의 몸과 만나면 게임오버
         break
 
     if mat[mr][mc] != 100:  # 그냥 일반 칸이면
@@ -40,9 +40,6 @@ while True:
         if info[play_time] == "D": #오른쪽(시계 회전)
             direction = (direction + 1) % 4
         elif info[play_time] == "L": #왼쪽(반시계 회전)
-            direction = (direction + 3) % 4
-
-        # play = play[1:] #뱡향 지시 소멸
+            direction = (direction - 1) % 4
 
 print(play_time+1)
-
