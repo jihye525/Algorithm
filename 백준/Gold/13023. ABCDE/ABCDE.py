@@ -1,5 +1,4 @@
 import sys
-sys.setrecursionlimit(5000)
 input = sys.stdin.readline
 N, M = map(int, input().split())
 A = [[] for _ in range(N)]
