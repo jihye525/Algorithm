@@ -5,15 +5,12 @@ trees = list(map(int, input().split()))
 start = 0
 end = max(trees)
 ans = 0
-while start < end:
+while start <= end:
     mid = (start + end) // 2
     gain = sum([i - mid for i in trees if mid < i])
-    if gain > m:
+    if gain >= m:
         start = mid + 1
     else:
-        end = mid
+        end = mid - 1
 
-if sum([i - start for i in trees if start < i]) < m:
-    print(start - 1)
-else:
-    print(start)
+print(end)
