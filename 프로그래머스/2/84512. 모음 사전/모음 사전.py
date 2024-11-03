@@ -1,6 +1,6 @@
 ans = 0
 num = 0
-def dfs(word, n, target):
+def dfs(current_word, n, target):
     global ans, num
     alpha = ['A', 'E', 'I', 'O', 'U']
     
@@ -9,10 +9,9 @@ def dfs(word, n, target):
 
     for c in alpha:
         num += 1
-        if word + c == target:
+        if current_word + c == target:
             ans = num
-        dfs(word+c, n + 1, target)
-
+        dfs(current_word + c, n + 1, target)
         
 def solution(word):
     dfs('', 0, word)
