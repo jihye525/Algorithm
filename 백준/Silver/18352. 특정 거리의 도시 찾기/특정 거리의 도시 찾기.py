@@ -22,7 +22,7 @@ def bfs(start):
                 distance[i] = distance[s] + 1
                 queue.append(i)
                 if distance[i] == K:
-                    K_city = True
+                    queue.pop()
 
     for i in range(N + 1):
         if distance[i] == K:
