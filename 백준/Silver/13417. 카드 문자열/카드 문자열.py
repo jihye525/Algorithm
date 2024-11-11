@@ -5,12 +5,9 @@ tc = int(input())
 for _ in range(tc):
     n = int(input())
     alpha = list(input().split())
-    words = [alpha[0]]
+    first_word = ""
 
-    for i in range(1, n):
-        temp = []
-        for word in words:
-            temp.append(min(word + alpha[i], alpha[i] + word))
-        words = temp
+    for i in range(n):
+        first_word = min(first_word + alpha[i], alpha[i] + first_word)
 
-    print(words[0])
+    print(first_word)
