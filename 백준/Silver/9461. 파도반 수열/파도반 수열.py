@@ -1,12 +1,10 @@
-import sys
-input = sys.stdin.readline
+tc = int(input())
+n_lst = [int(input()) for _ in range(tc)]
+dp = [1, 1, 1, 2, 2] + [0] * (max(n_lst))
+for i in range(5, max(n_lst)):
+    dp[i] = dp[i - 1] + dp[i - 5]
 
-t = int(input())
-arr = [0, 1, 1, 1, 2, 2, 3, 4, 5, 7, 9]
-
-for i in range(11,101):
-    arr.append(arr[i-2]+arr[i-3])
-
-for _ in range(t):
-    n = int(input())
-    print(arr[n])
+for n in n_lst:
+    print(dp[n-1])
+    
+    
