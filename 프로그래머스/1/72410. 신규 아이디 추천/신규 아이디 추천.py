@@ -7,10 +7,10 @@ def solution(new_id):
     new_id = new_id.strip(".") # 4단계 문자열의 시작과 끝에 '.'가 있으면 제거
     if len(new_id) == 0: # 5단계 빈 문자열이라면 'a'룰 대입 + 7단계 문자열의 개수가 3이하면 3이상이 될 때까지 마지막 문자 반복
         new_id = 'aaa'
-    elif len(new_id) > 15: # 6단계 아이디 길이가 16이상이면 16이상의 문자 제거 + 마지막 문자 '.'이면 제거
+    else: # 6단계 아이디 길이가 16이상이면 16이상의 문자 제거 + 마지막 문자 '.'이면 제거
         new_id = new_id[:15]
         new_id = new_id.strip(".")
-    elif len(new_id) < 3: # 7단계 문자열의 개수가 3이하면 3이상이 될 때까지 마지막 문자 반복
+    if len(new_id) < 3: # 7단계 문자열의 개수가 3이하면 3이상이 될 때까지 마지막 문자 반복
         new_id = new_id + new_id[-1] * (3-len(new_id))
 
     return new_id
