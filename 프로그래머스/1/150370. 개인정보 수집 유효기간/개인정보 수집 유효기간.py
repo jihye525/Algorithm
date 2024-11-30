@@ -10,9 +10,9 @@ def solution(today, terms, privacies):
         date, policy = privacies[i].split()
         yyyy, mm, dd = map(int, date.split("."))
 
-        e_m = mm + terms_dic[policy]
-        yyyy += (e_m - 1) // 12
-        mm = ((e_m - 1) % 12) + 1
+        mm += terms_dic[policy]
+        yyyy += (mm - 1) // 12
+        mm = ((mm - 1) % 12) + 1
 
         if yyyy < t_y or (yyyy == t_y and mm < t_m) or (yyyy == t_y and mm == t_m and dd <= t_d):
             answer.append(i+1)
