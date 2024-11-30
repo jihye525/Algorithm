@@ -1,6 +1,12 @@
+def to_days(y, m, d):
+    return (y * 12 * 28) + (m * 28) + d
+
+
 def solution(today, terms, privacies):
     answer = []
     t_y, t_m, t_d = map(int, today.split("."))
+    today_days = to_days(t_y, t_m, t_d)
+
     terms_dic = dict()
     for t in terms:
         p, m = t.split()
@@ -10,11 +16,7 @@ def solution(today, terms, privacies):
         date, policy = privacies[i].split()
         yyyy, mm, dd = map(int, date.split("."))
 
-        mm += terms_dic[policy]
-        yyyy += (mm - 1) // 12
-        mm = ((mm - 1) % 12) + 1
-
-        if yyyy < t_y or (yyyy == t_y and mm < t_m) or (yyyy == t_y and mm == t_m and dd <= t_d):
-            answer.append(i+1)
+        if to_days(yyyy, mm + terms_dic[policy], dd) <= today_days:
+            answer.append(i + 1)
 
     return answer
