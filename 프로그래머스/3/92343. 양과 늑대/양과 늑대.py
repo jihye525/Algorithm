@@ -14,9 +14,7 @@ def solution(info, edges):
         for i in range(len(next_lst)-1, -1, -1):
             next_node = next_lst[i]
             if not visited[next_node]:
-                next_visit = next_lst[:]
-                next_visit.remove(next_node)
-                next_visit += trees[next_node][:]
+                next_visit = next_lst[:i]+next_lst[i+1:] + trees[next_node]
                 next_visited = visited[:]
                 next_visited[next_node] = True
 
@@ -28,6 +26,6 @@ def solution(info, edges):
                     follow_me(next_node, next_sheep, wolves, next_visit, next_visited)
 
     visited_lst[0] = True
-    follow_me(0, 1, 0, trees[0][:], visited_lst)
+    follow_me(0, 1, 0, trees[0], visited_lst)
 
     return max(answer)
