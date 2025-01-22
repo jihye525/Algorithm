@@ -1,11 +1,10 @@
 def solution(info, edges):
     answer = []
-    visited_lst = [False] * (len(info))
     trees = [[] for _ in range(len(info))]
     for parent, child in edges:
         trees[parent].append(child)
 
-    def follow_me(node, sheep, wolves, next_lst, visited):
+    def follow_me(node, sheep, wolves, next_lst):
         if sheep <= wolves:
             return
 
@@ -13,17 +12,15 @@ def solution(info, edges):
 
         for i in range(len(next_lst)):
             next_node = next_lst[i]
-            if not visited[next_node]:
-                next_visit = next_lst[:i]+next_lst[i+1:] + trees[next_node]
-                next_visited = visited[:]
-                next_visited[next_node] = True
+            
+            next_visit = next_lst[:i]+next_lst[i+1:] + trees[next_node]
 
-                if info[next_node]:
-                    follow_me(next_node, sheep, wolves + 1, next_visit, next_visited)
-                else:
-                    follow_me(next_node, sheep + 1, wolves, next_visit, next_visited)
 
-    visited_lst[0] = True
-    follow_me(0, 1, 0, trees[0], visited_lst)
+            if info[next_node]:
+                follow_me(next_node, sheep, wolves + 1, next_visit)
+            else:
+                follow_me(next_node, sheep + 1, wolves, next_visit)
+
+    follow_me(0, 1, 0, trees[0])
 
     return max(answer)
