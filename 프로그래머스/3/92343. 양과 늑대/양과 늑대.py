@@ -11,7 +11,7 @@ def solution(info, edges):
 
         answer.append(sheep)
 
-        for i in range(len(next_lst)-1, -1, -1):
+        for i in range(len(next_lst)):
             next_node = next_lst[i]
             if not visited[next_node]:
                 next_visit = next_lst[:i]+next_lst[i+1:] + trees[next_node]
@@ -19,11 +19,9 @@ def solution(info, edges):
                 next_visited[next_node] = True
 
                 if info[next_node]:
-                    next_wolves = wolves + 1
-                    follow_me(next_node, sheep, next_wolves, next_visit, next_visited)
+                    follow_me(next_node, sheep, wolves + 1, next_visit, next_visited)
                 else:
-                    next_sheep = sheep + 1
-                    follow_me(next_node, next_sheep, wolves, next_visit, next_visited)
+                    follow_me(next_node, sheep + 1, wolves, next_visit, next_visited)
 
     visited_lst[0] = True
     follow_me(0, 1, 0, trees[0], visited_lst)
