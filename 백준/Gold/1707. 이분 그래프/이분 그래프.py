@@ -1,4 +1,3 @@
-
 import sys
 from collections import deque
 
@@ -43,10 +42,9 @@ for _ in range(k):
   
     result = True
     for start in range(1, v + 1):
-        if visited[start]:
-            continue
-
-        result = result and bfs(start, A)
+        if not bfs(start, A):
+            result = False
+            break
 
     if result:
         print('YES')
