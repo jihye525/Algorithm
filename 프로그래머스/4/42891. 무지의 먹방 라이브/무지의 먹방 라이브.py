@@ -12,14 +12,14 @@ def solution(food_times, k):
 
     while h:
         t = (h[0][0] - previous) * food_num
-        if k >= t:
-            k -= t
-            previous, _ = heapq.heappop(h)
-            food_num -= 1
-        else:
+        if k < t:
             idx = k % food_num
             h.sort(key=lambda x: x[1])
             answer = h[idx][1]
             break
+        
+        k -= t
+        previous, _ = heapq.heappop(h)
+        food_num -= 1
 
     return answer
