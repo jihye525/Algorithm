@@ -7,9 +7,7 @@ for _ in range(num):
     front, back = 0, len(st) - 1  
     check = 0
 
-    for _ in range(len(st)):
-        if front >= back:
-            break
+    while front < back:
         if st[front] == st[back]:
             front += 1
             back -= 1
