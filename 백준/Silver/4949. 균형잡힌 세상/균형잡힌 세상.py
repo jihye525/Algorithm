@@ -1,38 +1,52 @@
+import sys
+
+input = sys.stdin.readline
+
 while True:
-    s = input()
-    if len(s) == 1 and s == '.':
+    str = input().rstrip()
+    stack = ['.']
+
+    if str == '.':
         break
-    ans = ['.']
-    for c in s:
+
+    check = True
+
+    for c in str:
         if c.isalpha() or c == " ":
             continue
         elif c == '(':
-            ans.append(c)
+            stack.append(c)
         elif c == ')':
-            if len(ans) != 0:
-                if ans[-1] == "(":
-                    ans.pop()
-                else:
+            if stack:
+                if stack[-1] != '(':
+                    check = False
                     break
-            else:
-                ans.append(c)
-                break
-        elif c == '[':
-            ans.append(c)
-        elif c == ']':
-            if len(ans) != 0:
-                if ans[-1] == "[":
-                    ans.pop()
                 else:
-                    break
+                    stack.pop()
             else:
-                ans.append(c)
+                check = False
                 break
-        elif c == '.':
-            if ans[-1] == '.':
-                ans.pop()
 
-    if len(ans) == 0:
+        elif c == '[':
+            stack.append(c)
+        elif c == ']':
+            if stack:
+                if stack[-1] != '[':
+                    check = False
+                    break
+                else:
+                    stack.pop()
+            else:
+                check = False
+                break
+        elif c == ".":
+            if stack[-1] == ".":
+                stack.pop()
+            else:
+                check = False
+                break
+
+    if check and len(stack) == 0:
         print("yes")
     else:
         print("no")
