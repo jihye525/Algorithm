@@ -3,14 +3,14 @@ import sys
 
 read = sys.stdin.readline
 n = int(read())
-aList = list(map(int, read().split()))
+numbers = list(map(int, read().split()))
 opr = list(map(int, read().split()))
 ans = []
 
 
 def dfs(rst, lst, opr):
 
-    if len(lst) == 0:     # 피연산자가 남아있지 않으면 종료
+    if len(lst) == 0:  
         ans.append(rst)
     else:
         if opr[0] != 0:
@@ -34,7 +34,7 @@ def dfs(rst, lst, opr):
             dfs(int(rst / lst[0]), lst[1:], oprC)
 
 
-dfs(aList[0], aList[1:], opr)
+dfs(numbers[0], numbers[1:], opr)
 
 print(max(ans))
 print(min(ans))
