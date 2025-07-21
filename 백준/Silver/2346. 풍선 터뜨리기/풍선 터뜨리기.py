@@ -1,18 +1,24 @@
-import sys
 from collections import deque
+import sys
 input = sys.stdin.readline
-
 n = int(input())
-q = deque(enumerate(map(int, input().split())))
-ans = []
+moves = list(map(int, input().split()))
 
-while q:
-    idx, paper = q.popleft()
-    ans.append(idx + 1)
+balloons = deque((i + 1, move) for i, move in enumerate(moves))
 
-    if paper > 0:
-        q.rotate(-(paper - 1))
-    elif paper < 0:
-        q.rotate(-paper)
+result = []
 
-print(' '.join(map(str, ans)))
+while balloons:
+    idx, move = balloons.popleft()
+    result.append(idx)
+
+    if not balloons:
+        break
+
+    if move > 0:
+        balloons.rotate(-(move - 1))
+    else:
+        balloons.rotate(-(move))
+
+
+print(' '.join(map(str, result)))
