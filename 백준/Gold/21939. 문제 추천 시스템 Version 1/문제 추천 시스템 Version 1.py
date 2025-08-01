@@ -15,8 +15,9 @@ def get_recommend(x):
         return problems[0][1]
 
 def solved(p_num):
-    idx = bisect.bisect_left(problems, (num_level_dict.pop(p_num),p_num)) #가장 왼쪽꺼 뽑아야 하니까 중요도 0
-    if idx < len(problems) and problems[idx][1] == p_num:
+    level = num_level_dict.pop(p_num, None) # None을 안하면 keyError
+    idx = bisect.bisect_left(problems, (level, p_num))
+    if idx < len(problems) and problems[idx] == (level, p_num):
         problems.pop(idx)
 
 def solve():
