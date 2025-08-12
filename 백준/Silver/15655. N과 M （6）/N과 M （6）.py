@@ -1,14 +1,11 @@
-
-def recur(number):
+def recur(number, idx):
     if number == M:
         print(*arr)
         return
 
-    for i in lst:
-        if arr and i <= arr[-1]:
-            continue
-        arr.append(i)
-        recur(number + 1)
+    for i in range(idx, len(lst)):
+        arr.append(lst[i])
+        recur(number + 1, i+1)
         arr.pop()
 
 
@@ -16,4 +13,4 @@ N, M = map(int, input().split())
 lst = list(map(int, input().split()))
 lst.sort()
 arr = []
-recur(0)
+recur(0, 0)
