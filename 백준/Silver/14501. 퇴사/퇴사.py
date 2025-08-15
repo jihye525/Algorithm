@@ -1,19 +1,23 @@
 import sys
+input = sys.stdin.readline
 
-read = sys.stdin.readline
+n = int(input())
+interviews = [list(map(int, input().split())) for _ in range(n)]
+dp = [-1 for _ in range(n + 1)]
 
-n = int(read())
-TP = [list(map(int, read().split())) for _ in range(n)]
+def recur(idx):
+    if idx == n:
+        return 0
+    if idx > n:
+        return -9999999999999
 
-sumList = [0] * (n + 1)  # 맨 마지막은 0으로 초기화
+    if dp[idx] != -1:
+        return dp[idx]
 
-for i in range(n-1, -1, -1): #마지막부터 앞으로
-    if i + TP[i][0] <= n:
-        if sumList[i + TP[i][0]] + TP[i][1] >= sumList[i + 1]:
-            sumList[i] = sumList[i+TP[i][0]] + TP[i][1]
-        else:
-            sumList[i] = sumList[i + 1]
-    else:
-        sumList[i] = sumList[i + 1]
+    #상담을 받거나 안받거나 중 더 이득인 것을 dp에 저장시키기
+    dp[idx] = max(recur(idx + interviews[idx][0]) + interviews[idx][1], recur(idx + 1))
 
-print(sumList[0])
+    return dp[idx]
+
+recur(0)
+print(dp[0])
